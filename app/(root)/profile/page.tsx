@@ -1,4 +1,5 @@
 'use client'
+import { Skeleton } from "@/components/ui/skeleton"
 
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
@@ -30,7 +31,16 @@ export default function ProfilePage() {
     }
   }
   if (status === "loading") {
-    return <div className='flex justify-center text-4xl'>Loading....</div>
+    return (
+      <div className="flex flex-col items-center space-y-3">
+        <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+        <div className="space-y-2">
+          <Skeleton className="h-20 w-[500px]" />
+          <Skeleton className="h-20 w-[500px]" />
+        </div>
+      </div>
+    )
+
   }
 
   if (!session) {

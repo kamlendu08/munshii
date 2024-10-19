@@ -19,33 +19,77 @@ export async function POST(req: Request) {
   const formattedEndDate = endDate ? new Date(endDate) : null
 
   try {
-    const lentTransaction = await prisma.lentMoney.findUnique({ where: { id } })
-    const borrowedTransaction = await prisma.borrowedMoney.findUnique({ where: { id } })
+    const result = await prisma.$transaction(async (prisma) => {
+      const lentTransaction = await prisma.lentMoney.findUnique({ where: { id } })
+      const borrowedTransaction = await prisma.borrowedMoney.findUnique({ where: { id } })
 
-    const updateData = {
-      amount: parseFloat(amount),
-      interestRate: parseFloat(interestRate),
-      interestType,
-      startDate: formattedStartDate,
-      isRepaid,
-      endDate: formattedEndDate,
-    }
+      if (!lentTransaction && !borrowedTransaction) {
+        throw new Error('Transaction not found')
+      }
 
-    if (lentTransaction) {
-      await prisma.lentMoney.update({
-        where: { id },
-        data: updateData,
-      })
-    } else if (borrowedTransaction) {
-      await prisma.borrowedMoney.update({
-        where: { id },
-        data: updateData,
-      })
-    } else {
-      return NextResponse.json({ error: 'Transaction not found' }, { status: 404 })
-    }
+      const updateData = {
+        amount: parseFloat(amount),
+        interestRate: parseFloat(interestRate),
+        interestType,
+        startDate: formattedStartDate,
+        isRepaid,
+        endDate: formattedEndDate,
+      }
 
-    return NextResponse.json({ success: true })
+      if (lentTransaction) {
+        // Update lentMoney table
+        await prisma.lentMoney.update({
+          where: { id },
+          data: updateData,
+        })
+
+        // Update corresponding borrowedMoney entry
+        await prisma.borrowedMoney.updateMany({
+          where: {
+            borrowerId: lentTransaction.borrowerId,
+            lenderId: lentTransaction.lenderId,
+            amount: lentTransaction.amount,
+            startDate: lentTransaction.startDate,
+          },
+          data: {
+            amount: updateData.amount,
+            interestRate: updateData.interestRate,
+            interestType: updateData.interestType,
+            startDate: updateData.startDate,
+            isRepaid: updateData.isRepaid,
+            endDate: updateData.endDate,
+          },
+        })
+      } else if (borrowedTransaction) {
+        // Update borrowedMoney table
+        await prisma.borrowedMoney.update({
+          where: { id },
+          data: updateData,
+        })
+
+        // Update corresponding lentMoney entry
+        await prisma.lentMoney.updateMany({
+          where: {
+            borrowerId: borrowedTransaction.borrowerId,
+            lenderId: borrowedTransaction.lenderId,
+            amount: borrowedTransaction.amount,
+            startDate: borrowedTransaction.startDate,
+          },
+          data: {
+            amount: updateData.amount,
+            interestRate: updateData.interestRate,
+            interestType: updateData.interestType,
+            startDate: updateData.startDate,
+            isRepaid: updateData.isRepaid,
+            endDate: updateData.endDate,
+          },
+        })
+      }
+
+      return { success: true }
+    })
+
+    return NextResponse.json(result)
   } catch (error) {
     console.error('Error updating transaction:', error)
     return NextResponse.json({ error: 'Failed to update transaction' }, { status: 500 })

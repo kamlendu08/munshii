@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button"
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton"
+
 export default function Dashboard() {
   const router = useRouter();
   const { data: session, status } = useSession()
@@ -47,11 +49,22 @@ export default function Dashboard() {
   if (!session) {
     router.push('/');
   }
-  // if (!financialData) {
-  //   return <div>Loading...</div>
-  // }
+  
   if (status == 'loading' || !financialData) {
-    return <div className="flex justify-center text-6xl">Loading...</div>
+    // return <div className="flex justify-center text-6xl">Loading...</div>
+    return (
+      <div className="min-h-screen bg-white px-20 mt-6 font-consola">
+        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Transaction Details</h1>
+        <div className="flex flex-col items-center space-y-3">
+          <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+          <div className="space-y-2">
+            <Skeleton className="h-20 w-[500px]" />
+            <Skeleton className="h-20 w-[500px]" />
+          </div>
+        </div>
+      </div>
+    )
+
   }
   // Placeholder data - replace with actual data in your implementation
   const totalDebt = 5000000
@@ -61,7 +74,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-white text-black px-8 flex flex-col items-center font-consola">
-      <h1 className="text-4xl   lg:text-6xl font-extralight  text-center">WELCOME {session?.user?.name}</h1>
+      <h1 className="text-4xl   lg:text-5xl font-extralight  text-center">WELCOME {session?.user?.name}</h1>
       <h1 className="text-2xl  p-2 lg:text-4xl font-extralight  text-center"> SUMMARY</h1>
       <canvas id="myCanvas"   className="bg-gray-300 w-96 h-1" ></canvas>
 
@@ -100,7 +113,7 @@ export default function Dashboard() {
         <div>
           <h2 className="text-2xl font-bold mb-4">Additional Information</h2>
         </div>
-        <div className="bg-gray-100  rounded-lg">
+        <div className="  rounded-lg">
           <p className="mb-2"><strong>Total Lent Interest:</strong> ₹{financialData.totalLentInterest.toLocaleString()}</p>
           <p className="mb-2"><strong>Total Borrowed Interest:</strong> ₹{financialData.totalBorrowedInterest.toLocaleString()}</p>
           <p className="mt-4"><strong>Total Interest:</strong> ₹{financialData.totalInterest.toLocaleString()}</p>
