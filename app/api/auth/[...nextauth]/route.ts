@@ -52,7 +52,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn() {
       try {
         // Custom logic for sign-in can go here if needed.
         return true // Allow the sign-in
