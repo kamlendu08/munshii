@@ -6,9 +6,17 @@ import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton"
 
 export default function Dashboard() {
+  type FinancialData = {
+    totalDebt: number;
+    totalLent: number;
+    netBalance: number;
+    totalLentInterest: number;
+    totalBorrowedInterest: number;
+    totalInterest: number;
+  };
   const router = useRouter();
   const { data: session, status } = useSession()
-  const [financialData, setFinancialData] = useState<any>({
+  const [financialData, setFinancialData] = useState<FinancialData>({
     totalDebt: 0,
     totalLent: 0,
     netBalance: 0,
@@ -23,7 +31,7 @@ export default function Dashboard() {
     }
   }, [session])
 
-  const [error, setError] = useState<string | null>(null);
+  const [, setError] = useState<string | null>(null);
   const fetchFinancialData = async () => {
     try {
       setError(null)

@@ -10,7 +10,18 @@ import { Skeleton } from '@/components/ui/skeleton'
 export default function EditDetailPage({ params }: { params: { id: string } }) {
     const { data: session } = useSession()
     const router = useRouter()
-    const [transaction, setTransaction] = useState<any>(null)
+    // const [transaction, setTransaction] = useState<any>(null)
+    type Transaction = {
+        id: string;
+        amount: number;
+        interestRate: number;
+        interestType: 'SIMPLE' | 'COMPOUND';
+        startDate: string; // or Date if you're using Date objects
+        isRepaid: boolean;
+    };
+
+    const [transaction, setTransaction] = useState<Transaction | null>(null);
+
     const [amount, setAmount] = useState('')
     const [interestRate, setInterestRate] = useState('')
     const [interestType, setInterestType] = useState('')
@@ -61,18 +72,18 @@ export default function EditDetailPage({ params }: { params: { id: string } }) {
     }
 
     if (!session || !transaction) {
-          return (
+        return (
             <div className="min-h-screen bg-white px-20 mt-6 font-consola">
-              <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Transaction Details</h1>
-              <div className="flex flex-col items-center space-y-3">
-                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                <div className="space-y-2">
-                  <Skeleton className="h-20 w-[500px]" />
-                  <Skeleton className="h-20 w-[500px]" />
+                <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Transaction Details</h1>
+                <div className="flex flex-col items-center space-y-3">
+                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                    <div className="space-y-2">
+                        <Skeleton className="h-20 w-[500px]" />
+                        <Skeleton className="h-20 w-[500px]" />
+                    </div>
                 </div>
-              </div>
             </div>
-          )
+        )
     }
 
     return (

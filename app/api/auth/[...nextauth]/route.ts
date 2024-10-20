@@ -14,21 +14,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    // async signIn({ user, account, profile }) {
-    //   if (account?.provider === "google") {
-    //     try {
-    //       const existingUser = await prisma.user.findUnique({
-    //         where: { email: user.email ?? undefined },
-    //       })
-    //       return true // Always return true to allow sign in
-    //     } catch (error) {
-    //       console.error("Error in signIn callback:", error)
-    //       return false
-    //     }
-    //   }
-    //   return true
-    // },
-    async signIn({ user, account, profile }) {
+    async signIn() {
       try {
         // Custom logic for sign-in can go here if needed.
         return true; // Allow the sign-in

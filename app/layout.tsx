@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import CustomFont from 'next/font/local'
 import "./globals.css";
 import { MenubarDemo } from "./func/butt";

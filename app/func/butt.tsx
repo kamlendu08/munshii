@@ -14,8 +14,8 @@ import {
 
 export function MenubarDemo() {
   const [isOpen, setIsOpen] = useState(false)
-  const { data: session, status } = useSession()
-
+  const { status } = useSession()
+  
   const menuItems = [
     { href: '', label: 'About' },
     { href: '', label: 'Contact' },

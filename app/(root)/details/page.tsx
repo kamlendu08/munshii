@@ -131,7 +131,7 @@ interface Transaction {
 }
 
 export default function DetailsPage() {
-  const { data: session, status } = useSession()
+  const {  status } = useSession()
   const router = useRouter()
   const [searchName, setSearchName] = useState('')
   const [filterType, setFilterType] = useState('ALL')

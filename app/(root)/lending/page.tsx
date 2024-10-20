@@ -62,7 +62,7 @@ export default function LendingPage() {
                         />
                         {searchResults.length > 0 && (
                             <ul className="mt-2 border border-gray-300 rounded-md">
-                                {searchResults.map((user: any) => (
+                                {searchResults.map((user: { id: string; name: string; email: string | null | undefined }) => (
                                     <li
                                         key={user.id}
                                         className="px-3 py-2 hover:bg-gray-200 cursor-pointer"

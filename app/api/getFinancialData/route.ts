@@ -4,8 +4,14 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from '../auth/[...nextauth]/route'
 
 const prisma = new PrismaClient()
-
-function calculateInterest(transaction: any) {
+type Transaction = {
+  amount: number
+  interestRate: number
+  interestType: 'SIMPLE' | 'COMPOUND'
+  startDate: Date
+  endDate: Date | null
+}
+function calculateInterest(transaction: Transaction) {
   const { amount, interestRate, interestType, startDate, endDate } = transaction
   const start = startDate ? new Date(startDate) : new Date()
   const end = endDate ? new Date(endDate) : new Date()
@@ -24,7 +30,7 @@ function calculateInterest(transaction: any) {
   }
 }
 
-export async function GET(req: Request) {
+export async function GET() {
   const session = await getServerSession(authOptions)
   
   if (!session || !session.user?.email) {

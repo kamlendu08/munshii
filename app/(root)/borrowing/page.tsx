@@ -40,7 +40,12 @@ export default function BorrowingPage() {
         router.push('/')
         return null
     }
-
+    type User = {
+        id: string;
+        name: string;
+        email?: string; // Since the email could be `null` or `undefined` as per the filter
+    };
+    
     return (
         <div className="min-h-screen bg-white flex  justify-center font-consola">
             <div className=" rounded-lg w-96 mt-6 lg:ml-12">
@@ -63,7 +68,7 @@ export default function BorrowingPage() {
                         />
                         {searchResults.length > 0 && (
                             <ul className="mt-2 border border-gray-300 rounded-md">
-                                {searchResults.map((user: any) => (
+                                {searchResults.map((user: User) => (
                                     <li
                                         key={user.id}
                                         className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
