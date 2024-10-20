@@ -91,7 +91,7 @@
 // }
 
 import { NextResponse } from 'next/server'
-import { PrismaClient, LentMoney, BorrowedMoney, User } from '@prisma/client'
+import { PrismaClient, LentMoney, BorrowedMoney } from '@prisma/client'
 import { getServerSession } from "next-auth/next"
 import { authOptions } from '../auth/[...nextauth]/route'
 
