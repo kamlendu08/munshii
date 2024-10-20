@@ -3,9 +3,9 @@
 import { getServerSession } from "next-auth";
 import Dashboard from "./(root)/dashboard/page";
 import Home from "./(root)/homepage/page";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import { PrismaClient } from "@prisma/client";
 import ProfilePage from "./(root)/profile/page";
+import { authOptions } from "./lib/auth";
 const prisma = new PrismaClient();
 export default async function Me() {
   // const { data: session, status } = useSession();

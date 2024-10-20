@@ -15,7 +15,13 @@ export default function Dashboard() {
     totalInterest: number;
   };
   const router = useRouter();
-  const { data: session, status } = useSession()
+  // const { data: session, status } = useSession()
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push('/');
+    },
+  })
   const [financialData, setFinancialData] = useState<FinancialData>({
     totalDebt: 0,
     totalLent: 0,
@@ -58,11 +64,10 @@ export default function Dashboard() {
     router.push('/');
   }
   
-  if (status == 'loading' || !financialData) {
-    // return <div className="flex justify-center text-6xl">Loading...</div>
+  if (status === 'loading' || !financialData) {
     return (
       <div className="min-h-screen bg-white px-20 mt-6 font-consola">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Transaction Details</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Dashboard</h1>
         <div className="flex flex-col items-center space-y-3">
           <Skeleton className="h-[125px] w-[250px] rounded-xl" />
           <div className="space-y-2">
@@ -72,7 +77,6 @@ export default function Dashboard() {
         </div>
       </div>
     )
-
   }
   // Placeholder data - replace with actual data in your implementation
   const totalDebt = 5000000
