@@ -85,12 +85,12 @@ export default function Dashboard() {
 
 
   return (
-    <div className="min-h-screen bg-white text-black px-8 flex flex-col items-center ">
-      <h1 className="text-4xl   lg:text-5xl font-extralight  text-center">WELCOME {session?.user?.name}</h1>
+    <div className="min-h-screen bg-white text-black px-8 flex flex-col items-center mt-8">
+      <h1 className="text-4xl   lg:text-5xl font-normal  text-center">WELCOME {session?.user?.name}</h1>
       <h1 className="text-2xl  p-2 lg:text-4xl font-extralight  text-center"> SUMMARY</h1>
       <canvas id="myCanvas"   className="bg-gray-300 w-96 h-1" ></canvas>
 
-      <div className="flex flex-wrap justify-center gap-8 mb-12">
+      <div className="flex flex-wrap justify-center gap-8 mb-8 mt-12">
         <div className=" p-6 mx-6 rounded-lg r ">
           <h2 className="text-2xl mb-2">Total Debt</h2>
           <p className="text-5xl font-bold ">₹{(Number((financialData.totalDebt + financialData.totalBorrowedInterest).toFixed(1))).toLocaleString()}</p>
@@ -113,22 +113,22 @@ export default function Dashboard() {
         </Button>
       </div>
 
-      <div className="flex gap-4 flex-wrap">
-        <Button onClick={() => { router.push('/lending') }} variant="outline" className="h-16 px-8 text-lg bg-gray-200 hover:bg-gray-300 outline outline-gray-400">
+      <div className="flex gap-4 flex-wrap justify-center">
+        <Button onClick={() => { router.push('/lending') }} variant="outline" className="h-16 w-56 px-8  text-lg bg-gray-200 hover:bg-gray-300 outline outline-gray-400">
           New Lent Entry
         </Button>
-        <Button onClick={() => { router.push('/borrowing') }} variant="outline" className="h-16 px-8 text-lg bg-gray-200 hover:bg-gray-300 outline outline-gray-400">
+        <Button onClick={() => { router.push('/borrowing') }} variant="outline" className="h-16 w-56 px-8 text-lg bg-gray-200 hover:bg-gray-300 outline outline-gray-400">
           New Borrow Entry
         </Button>
       </div>
-      <div className=" max-w-2xl mt-10">
+      <div className=" mt-16 text-center text-xl">
         <div>
-          <h2 className="text-2xl font-bold mb-4">Additional Information</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center">Additional Information</h2>
         </div>
         <div className="  rounded-lg">
-          <p className="mb-2"><strong>Total Lent Interest:</strong> ₹{financialData.totalLentInterest.toLocaleString()}</p>
-          <p className="mb-2"><strong>Total Borrowed Interest:</strong> ₹{financialData.totalBorrowedInterest.toLocaleString()}</p>
-          <p className="mt-4"><strong>Total Interest:</strong> ₹{financialData.totalInterest.toLocaleString()}</p>
+          <p className=""><strong>Total Lent Interest:</strong> ₹{financialData.totalLentInterest.toLocaleString()}</p>
+          <p className=""><strong>Total Borrowed Interest:</strong> ₹{financialData.totalBorrowedInterest.toLocaleString()}</p>
+          <p className=""><strong>Total Interest:</strong> ₹{financialData.totalInterest.toLocaleString()}</p>
         </div>
       </div>
     </div>
