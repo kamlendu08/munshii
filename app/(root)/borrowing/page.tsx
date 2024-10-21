@@ -47,7 +47,7 @@ export default function BorrowingPage() {
     };
     
     return (
-        <div className="min-h-screen bg-white flex  justify-center font-consola">
+        <div className="min-h-screen bg-white flex  justify-center ">
             <div className=" rounded-lg w-96 mt-6 lg:ml-12">
                 <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Add Borrowing Details</h1>
                 <form onSubmit={handleSubmit} className="space-y-4">

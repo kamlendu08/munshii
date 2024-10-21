@@ -85,7 +85,7 @@ export default function Dashboard() {
 
 
   return (
-    <div className="min-h-screen bg-white text-black px-8 flex flex-col items-center font-consola">
+    <div className="min-h-screen bg-white text-black px-8 flex flex-col items-center ">
       <h1 className="text-4xl   lg:text-5xl font-extralight  text-center">WELCOME {session?.user?.name}</h1>
       <h1 className="text-2xl  p-2 lg:text-4xl font-extralight  text-center"> SUMMARY</h1>
       <canvas id="myCanvas"   className="bg-gray-300 w-96 h-1" ></canvas>

@@ -199,7 +199,7 @@ export default function DetailsPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white px-20 mt-6 font-consola">
+      <div className="min-h-screen bg-white px-20 mt-6 ">
         <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Transaction Details</h1>
         <div className="flex justify-center items-center h-screen text-red-500">{error}</div>
       </div>

@@ -49,7 +49,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex justify-center font-consola mt-6">
+    <div className="min-h-screen bg-white flex justify-center  mt-6">
       <div className=" p-8 rounded-lg lg:ml-12 ">
         <h1 className="text-3xl lg:text-5xl font-bold mb-6 text-center text-gray-800">Complete Your Profile</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
