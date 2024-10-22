@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <div className="lg:flex mx-8 lg:mx-44 sm:mx-16">
-      <div className="h-screen font-consola mt-28">
+      <div className="h-screen  mt-28">
         <div className="text-xl sm:text-4xl font-light mt-6 text-start text-gray-800 ">
           Monitor Your Cash Flow
         </div>
