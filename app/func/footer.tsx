@@ -12,10 +12,10 @@ export default function Footer() {
           <p className="text-sm text-gray-600 mt-1">&copy; {currentYear} All rights reserved.</p>
         </div>
         <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
-          <Link href="/terms" className="text-sm text-gray-600 hover:text-gray-800">
+          <Link href="/termofservice" className="text-sm text-gray-600 hover:text-gray-800">
             Terms of Service
           </Link>
-          <Link href="/privacy" className="text-sm text-gray-600 hover:text-gray-800">
+          <Link href="/privacyPolicy" className="text-sm text-gray-600 hover:text-gray-800">
             Privacy Policy
           </Link>
           <Link href="/faq" className="text-sm text-gray-600 hover:text-gray-800">

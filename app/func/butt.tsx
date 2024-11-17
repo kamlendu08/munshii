@@ -17,10 +17,10 @@ export function MenubarDemo() {
   const { status } = useSession()
   
   const menuItems = [
-    { href: '', label: 'About' },
-    { href: '', label: 'Contact' },
-    { href: '', label: 'Privacy' },
-    { href: '', label: 'Pricing' },
+    { href: '/about', label: 'About' },
+    { href: 'contact', label: 'Contact' },
+    { href: '/privacy', label: 'Privacy' },
+    { href: '/pricing', label: 'Pricing' },
   ]
 
   const handleLogout = async () => {
