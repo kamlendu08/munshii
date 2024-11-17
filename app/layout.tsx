@@ -9,6 +9,10 @@ const consola = CustomFont({
   src: './fonts/CONSOLA.woff',
   variable: '--font-consola',
 })
+const lexend = CustomFont({
+  src: './fonts/Lexend.woff',
+  variable: '--font-lexend',
+})
 
 export const metadata: Metadata = {
   title: "Munshii",
@@ -24,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
 
       <body
-        className={`${consola.variable}`}
+        className={`${lexend.variable}`}
       >
         <Providers>
           <MenubarDemo />
